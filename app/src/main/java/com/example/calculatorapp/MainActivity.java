@@ -333,8 +333,13 @@ public class MainActivity extends AppCompatActivity {
                     ans.setText(var1 * var2 + "");
                     mul = false;
                 } else if (div == true) {
-                    ans.setText(var1 / var2 + "");
-                    div = false;
+                    if(var2!=0)
+                    {
+                        ans.setText(var1 / var2 + "");
+                    }else{
+                        ans.setText("Ivalid");
+                    }
+
                 }
                 else if(mod==true)
                 {
