@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     double var1,var2;
     boolean add,mul,sub,div,mod,equal,extra;
     String lastChar;
-    public void isNull()
+    public void setNull()
     {
         add = false;mul=false;sub=false;mod=false;div=false;
     }
@@ -22,6 +22,13 @@ public class MainActivity extends AppCompatActivity {
         if(str=="*" || str=="+" || str=="-" || str=="/" ||str=="%")
             return true;
         else return false;
+    }
+    public void checker(String numeric)
+    {
+        String tmp=newans.getText().toString();
+        var1 = Double.parseDouble(tmp.substring(0,tmp.length()-1));
+        newans.setText(var1+numeric);
+        setNull();
     }
 
     @Override
@@ -66,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                     equal=false;
                 }
                 ans.setText(ans.getText()+"0");
+                lastChar = "";
             }
         });
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
                     equal=false;
                 }
                 ans.setText(ans.getText()+"1");
+                lastChar = "";
             }
         });
         btn2.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                     equal=false;
                 }
                 ans.setText(ans.getText() + "2");
+                lastChar = "";
             }
         });
         btn3.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
                     equal=false;
                 }
                 ans.setText(ans.getText() + "3");
+                lastChar = "";
             }
         });
         btn4.setOnClickListener(new View.OnClickListener() {
@@ -109,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
                     ans.setText(null);
                     equal=false;
                 }
+                lastChar = "";
                 ans.setText(ans.getText() + "4");
             }
         });
@@ -120,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
                     ans.setText(null);
                     equal=false;
                 }
+                lastChar = "";
                 ans.setText(ans.getText() + "5");
             }
         });
@@ -131,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
                     ans.setText(null);
                     equal=false;
                 }
+                lastChar = "";
                 ans.setText(ans.getText() + "6");
             }
         });
@@ -142,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
                     ans.setText(null);
                     equal=false;
                 }
+                lastChar = "";
                 ans.setText(ans.getText() + "7");
             }
         });
@@ -153,6 +168,7 @@ public class MainActivity extends AppCompatActivity {
                     ans.setText(null);
                     equal=false;
                 }
+                lastChar = "";
                 ans.setText(ans.getText() + "8");
             }
         });
@@ -164,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
                     ans.setText(null);
                     equal=false;
                 }
+                lastChar = "";
                 ans.setText(ans.getText() + "9");
             }
         });
@@ -216,11 +233,19 @@ public class MainActivity extends AppCompatActivity {
         btnsub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                var1 = Double.parseDouble(ans.getText() + "");
-                newans.setText(var1+"-"+"");
-                sub = true;
-                next.setText(null);
-                ans.setText(null);
+                if(isChar(lastChar))
+                {
+                    checker("-");
+                    sub =true;
+                }else
+                {
+                    var1 = Double.parseDouble(ans.getText() + "");
+                    newans.setText(var1+"-"+"");
+                    sub = true;
+                    next.setText(null);
+                    ans.setText(null);
+                }
+                lastChar = "-";
             }
         });
         btnadd.setOnClickListener(new View.OnClickListener() {
@@ -228,34 +253,53 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(isChar(lastChar))
                 {
-
+                    checker("+");
+                    add =true;
+                }else
+                {
+                    var1 = Double.parseDouble(ans.getText() + "");
+                    newans.setText(var1+"+"+"");
+                    add = true;
+                    next.setText(null);
+                    ans.setText(null);
                 }
-                var1 = Double.parseDouble(ans.getText() + "");
-                newans.setText(var1+"+"+"");
-                add = true;
-                next.setText(null);
-                ans.setText(null);
+                lastChar = "+";
             }
         });
         btnmulti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                var1 = Double.parseDouble(ans.getText() + "");
-                newans.setText(var1+"*"+"");
-                mul = true;
-                next.setText(null);
-                ans.setText(null);
+                if(isChar(lastChar))
+                {
+                    checker("*");
+                    mul =true;
+                }else
+                {
+                    var1 = Double.parseDouble(ans.getText() + "");
+                    newans.setText(var1+"*"+"");
+                    mul = true;
+                    next.setText(null);
+                    ans.setText(null);
+                }
+                lastChar = "*";
             }
         });
         btndiv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                var1 = Double.parseDouble(ans.getText() + "");
+                if(isChar(lastChar))
+                {
+                    checker("/");
+                    div =true;
+                }else
+                {
+                    var1 = Double.parseDouble(ans.getText() + "");
+                    newans.setText(var1+"/"+"");
+                    div = true;
+                    next.setText(null);
+                    ans.setText(null);
+                }
                 lastChar = "/";
-                newans.setText(var1+"/"+"");
-                div = true;
-                next.setText(null);
-                ans.setText(null);
             }
         });
         btnc.setOnClickListener(new View.OnClickListener() {
@@ -266,6 +310,7 @@ public class MainActivity extends AppCompatActivity {
                 next.setText(null);
                 add=false;sub=false;div=false;
                 mul=false; mod = false;
+                lastChar = "";
             }
         });
 
@@ -273,6 +318,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 equal = true;
+                lastChar = "";
                 var2 = Double.parseDouble(ans.getText() + "");
                 newans.setText(newans.getText());
                 next.setText(var2+"");
