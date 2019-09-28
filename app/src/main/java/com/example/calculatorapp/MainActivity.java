@@ -12,6 +12,18 @@ public class MainActivity extends AppCompatActivity {
     TextView ans,newans,next;
     double var1,var2;
     boolean add,mul,sub,div,mod,equal,extra;
+    String lastChar;
+    public void isNull()
+    {
+        add = false;mul=false;sub=false;mod=false;div=false;
+    }
+    public boolean isChar(String str)
+    {
+        if(str=="*" || str=="+" || str=="-" || str=="/" ||str=="%")
+            return true;
+        else return false;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -214,6 +226,10 @@ public class MainActivity extends AppCompatActivity {
         btnadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(isChar(lastChar))
+                {
+
+                }
                 var1 = Double.parseDouble(ans.getText() + "");
                 newans.setText(var1+"+"+"");
                 add = true;
@@ -235,6 +251,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 var1 = Double.parseDouble(ans.getText() + "");
+                lastChar = "/";
                 newans.setText(var1+"/"+"");
                 div = true;
                 next.setText(null);
